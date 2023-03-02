@@ -1,0 +1,14 @@
+function multiply(num1,num2)
+  n=num1.len()
+  
+  if n<=1
+    return num1*num2
+  
+  num1l,num1r=split(num1)
+  num2l,num2r=split(num2)
+  
+  z0=multiply(num1l,num2l)
+  z1=multiply(num1r,num2r)
+  z3=multiply(num1l+num1r,num2l+num2r)-z0-z1
+  
+  return z1+z3>>(n/2)+z1>>n

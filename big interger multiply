@@ -1,14 +1,19 @@
 function multiply(num1,num2)
-  n=num1.len()
+  n1=num1.len()
+  n2=num2.len()
   
-  if n<=1
-    return num1*num2
+  if n1<=k or n2<=k //k is a particular integer
+    return ordinarymutiply(num1,num2)
   
-  num1l,num1r=split(num1)
-  num2l,num2r=split(num2)
+  m=max(n1,n2)/2
+  
+  num1l,num1r=split(num1,m)
+  num2l,num2r=split(num2,m)
   
   z0=multiply(num1l,num2l)
   z1=multiply(num1r,num2r)
-  z3=multiply(num1l+num1r,num2l+num2r)-z0-z1
+  z2=multiply(num1l+num1r,num2l+num2r)-z0-z1
   
-  return z1+z3>>(n/2)+z1>>n
+  result=add(z0,z2*10^m,z1*10^(2*m))
+  
+  return result

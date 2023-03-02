@@ -1,0 +1,20 @@
+function bfprt(A,k):
+  n=A.len()
+  
+  groups = partition_into_groups(A, 5)
+  
+  medians = []
+  for group in groups:
+    median = find_median(group)
+    medians.append(median)
+  
+  pivot = bfprt(medians, ⌈medians,len() / 2⌉)
+  
+  index=partition(A[1:n], pivot);
+  
+  if index==k 
+    return pivot
+  else if index>k 
+    retrun bfprt(A[1:index-1],k)
+  else 
+    retrun bfprt(A[index+1:n],k-index)

@@ -1,0 +1,20 @@
+function FFT(a):
+  n=a.size()
+  
+  if n==1:
+    return a
+    
+  wn=e^(2πi/n)
+  w=1
+  
+  a[0]=(a0,a2,……,a(n-2))
+  a[1]=(a1,a3,……,a(n-1))
+  
+  y[0]=FFT(a[0])
+  y[1]=FFT(a[1])
+  
+  for k 0 to n/2-1:
+    yk=yk[0]+wyk[1]
+    y(k+n/2)=y(k+n/2)[0]+wy(k+n/2)[1]
+    w=w*wn
+   return y

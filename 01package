@@ -5,7 +5,7 @@ def package(C,w,v):
     m=[0]*(C+1)
     
     for i in range(1,n+1):
-        for j in range(C，0，-1):
+        for j in range(C，w[i]，-1):
             if m[j]<m[j-w[i]]+v[i]:
                 m[j]=m[j-w[i]]+v[i]
                 x[i]=1

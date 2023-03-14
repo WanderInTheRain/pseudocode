@@ -1,0 +1,19 @@
+def optimal_bst(p, q):
+    n = len(p)
+    E = [[0 for i in range(n+1)] for j in range(n+1)]
+    W = [[0 for i in range(n+1)] for j in range(n+1)]
+    root = [[0 for i in range(n+1)] for j in range(n+1)]
+    for i in range(1, n+1):
+        E[i][i-1] = q[i-1]
+        W[i][i-1] = q[i-1]
+    for l in range(1, n):
+        for i in range(1, n-l+1):
+            j = i+l-1
+            E[i][j] = float('inf')
+            W[i][j] = W[i][j-1]+p[j]+q[j]
+            for r in range(i, j+1):
+                t = E[i][r-1]+E[r+1][j]+W[i][j]
+                if t < E[i][j]:
+                    E[i][j] = t
+                    root[i][j] = r
+    return E, root

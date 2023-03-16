@@ -1,0 +1,21 @@
+import itertools
+
+def MinimizeDFA(Q,Σ,δ, q0,F):
+    n=len(Q)
+    product=list(itertools.product(Q,Q))
+    
+    T=[[False]*n for _ in range(n)]
+    
+    for p,q in product:
+        if (p in F and not (q in F)) or (q in F and not (p in F)):
+            T[p][q]=True
+            T[q][p]=True
+            
+    for p,q in product:
+        if T[p][q]==False:
+            for a in Σ:
+                if T[δ(p,a),δ(q,a)]=True:
+                    T[p][q]=True
+                    T[q][p]=True
+   
+   return T

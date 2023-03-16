@@ -14,7 +14,7 @@ def MinimizeDFA(Q,Σ,δ, q0,F):
     for p,q in product:
         if T[p][q]==False:
             for a in Σ:
-                if T[δ(p,a),δ(q,a)]=True:
+                if T[δ(p,a),δ(q,a)]==True:
                     T[p][q]=True
                     T[q][p]=True
    

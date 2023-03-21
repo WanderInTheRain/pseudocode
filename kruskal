@@ -1,0 +1,30 @@
+def kruskal(graph):
+    # graph 是一个边列表，每个元素都是一个三元组 (u, v, w)，表示一条连接 u 和 v 的边，其权重为 w
+    # 返回值是最小生成树的边列表
+    parent={}
+    
+    def makeset(v):
+        parent[v]=v
+    def find(v):
+        if parent[v]!=v:
+            parent[v]=find(parent[v])
+        return parent[v]
+    def union(u,v):
+        root_u = find(u)
+        root_v = find(v)
+        if root_u != root_v:
+            parent[root_v] = root_u
+    
+    for u,v,_ in graph:
+        makeset(u)
+        makeset(v)
+    
+    graph.sort(key=lambda x:x[2])
+    
+    A=[]
+    
+    for u,v,w in graph:
+        if find(v)!=find(u):
+            A.append((u,v,w))
+            union(u,v)
+    return A

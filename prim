@@ -1,0 +1,28 @@
+def prim(graph):
+    V=len(graph)
+    
+    parent=[None]*V
+    key=[float('inf')]*V
+    mstset=[False]*V
+    
+    key[0] = 0
+    parent[0] = -1
+    
+    for _ in range(V):
+        min_value = float('inf')
+        min_index = -1
+    
+        for v in range(V):
+            if mstset[v] == False and key[v] < min_value:
+                min_value = key[v]
+                min_index = v
+        
+        u=min_index
+        mstset[u] = True
+        
+        for v in range(V):
+            if graph[u][v]>0 and mstset[v]==False and key[v]>graph[u][v]:
+                key[v]=graph[u][v]
+                parent[v]=u
+                
+        return parent

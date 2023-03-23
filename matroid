@@ -1,0 +1,7 @@
+def matroid(M,w):
+    A=set()
+    sorted_elements=sort(M['S'],key=lambda x: w[x],reverse=True)
+    for x in sorted_elements:
+        if A.union({x}).issubser(M['E']):
+            A=A.union({x})
+    return A

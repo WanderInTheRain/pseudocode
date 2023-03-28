@@ -1,0 +1,18 @@
+from queue import PriorityQueue
+
+def best_first_search(graph,start,target):
+    visted=set()
+    queue=PriorityQueue()
+    queue.put((0, start)) 
+    
+    while not queue.empty:
+        cost,current=queue.get()
+        if current==target:
+            return
+        if current not in visited:
+            visited.add(current)
+        for neighbor in graph[current]:
+            if neighbor not in visited:
+                visited.add(neighbor)
+                total_cost=cost+graph[current][neighbor]
+                queue.put((total_cost,neighbor))

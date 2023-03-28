@@ -1,4 +1,4 @@
-def best_fisrt_search(evaluation_fuction,is_goal,get_children):
+def best_fisrt_search(problem):
     """
     例：
     # 定义评估函数
@@ -20,12 +20,12 @@ def best_fisrt_search(evaluation_fuction,is_goal,get_children):
             children.append(i)
     return children
     """
-    heap=[root]
+    heap=[problem.initial_node()]
     while heap:
         current_node=heapq.heappop(heap)
-        if is_goal(current_node):
+        if problem.is_goal(current_node):
             return current_node
-        children=get_children(current_node)
+        children=problem.get_children(current_node)
         for child in children:
-            heapq.heappush(heap,(evaluation_function(child),child))
+            heapq.heappush(heap,(problem.evaluation_function(child),child))
     return None

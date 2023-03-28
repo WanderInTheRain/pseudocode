@@ -1,0 +1,32 @@
+def hill_climbing(problem,max_iterations=1000):
+    """
+    爬山法求解最优化问题
+    :param problem: 问题实例，必须提供initial_state()和get_neighbors()方法
+    :param max_iterations: 最大迭代次数
+    :return: 返回找到的最优解
+    例：class Problem:
+    def __init__(self, f, x0, dx=0.01):
+        self.f = f
+        self.x = x0
+        self.dx = dx
+
+    def initial_state(self):
+        return self.x
+
+    def get_neighbors(self, x):
+        return [x + self.dx, x - self.dx]
+
+    def evaluate(self, x):
+        return self.f(x)
+    """
+    current=problem.initial_state()
+    for i in range(max_iterations):
+        neighbors=problem.get_neighbors(current)
+        if not neighbors:
+            break
+            current = problem.initial_state()
+        neighbor=max(neighbors,key=lambda state:problem.evaluate(state))
+        if problem.evaluate(neighbor)<=problem.evaluate(current):
+            break
+        current=neighbor
+    return current

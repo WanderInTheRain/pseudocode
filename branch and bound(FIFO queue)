@@ -1,0 +1,35 @@
+from queue import Queue
+
+def branch_and_bound(problem):
+    """
+    problem.root：返回问题的根节点。
+    problem.is_solution(node)：检查给定的节点是否为问题的解。
+    problem.expand(node)：展开给定的节点以获取其子节点。
+    problem.is_feasible(child)：检查给定的子节点是否可行。
+    定义一个简单的 problem 对象：
+    class Problem:
+    def __init__(self):
+        self.root = Node()
+
+    def is_solution(self, node):
+        # Check if the given node is a solution
+        pass
+
+    def expand(self, node):
+        # Expand the given node to get its children
+        pass
+
+    def is_feasible(self, child):
+        # Check if the given child is feasible
+        pass
+    """
+    q=Queue()
+    q.put(problem.root)
+    while not q.empty():
+        node=q.get()
+        if problem.is_solution(node):
+            return node
+        for child in problem.expand(node):
+            if problem.is_feasible(child):
+                q.put(child)
+    return None

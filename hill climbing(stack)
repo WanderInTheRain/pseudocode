@@ -1,0 +1,50 @@
+def hill_climbing(problem):
+    """
+    爬山法求解问题
+    :param problem: 问题实例，必须提供initial_state(), is_goal(), get_neighbors()和heuristic()方法
+    :return: 返回找到的解
+    它定义了一个用来求解8数码难题的problem类：
+    from itertools import chain
+    class Problem:
+    def __init__(self, initial_state, goal_state):
+        self.initial = initial_state
+        self.goal = goal_state
+
+    def initial_state(self):
+        return self.initial
+
+    def is_goal(self, state):
+        return state == self.goal
+
+    def get_neighbors(self, state):
+        neighbors = []
+        zero_index = state.index(0)
+        if zero_index not in [0, 1, 2]:
+            new_state = list(state)
+            new_state[zero_index], new_state[zero_index - 3] = new_state[zero_index - 3], new_state[zero_index]
+            neighbors.append(tuple(new_state))
+        if zero_index not in [6, 7, 8]:
+            new_state = list(state)
+            new_state[zero_index], new_state[zero_index + 3] = new_state[zero_index + 3], new_state[zero_index]
+            neighbors.append(tuple(new_state))
+        if zero_index not in [0, 3, 6]:
+            new_state = list(state)
+            new_state[zero_index], new_state[zero_index - 1] = new_state[zero_index - 1], new_state[zero_index]
+            neighbors.append(tuple(new_state))
+        if zero_index not in [2, 5, 8]:
+            new_state = list(state)
+            new_state[zero_index], new_state[zero_index + 1] = new_state[zero_index + 1], new_state[zero_index]
+            neighbors.append(tuple(new_state))
+        return neighbors
+
+    def heuristic(self, state):
+        return sum([abs(i // 3 - state.index(i) // 3) + abs(i % 3 - state.index(i) % 3) for i in chain(range(1, 9), [0])])
+    """
+    stack=[problem.initial_state()]
+    while stack:
+        current=stack.pop()
+        if problem.is_goal(current):
+            return current
+        neighbors=problem.get_neighbors()
+        neighbors.sort(key=lambda state:probelm.heuristic(state),reverse=True)
+    return None

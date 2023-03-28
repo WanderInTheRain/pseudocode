@@ -1,0 +1,40 @@
+from queue import PriorityQueue
+
+def branch_and_bound(problem):
+    """
+    initial_node方法返回一个初始节点，其值为0且序列为空。
+    is_solution方法检查节点的序列之和是否等于目标值。
+    successors方法生成节点的后继，即将1到目标值之间的所有数字添加到序列中，只要新序列的和不超过目标值。
+    Node类定义了节点，其中包含节点的值（即序列之和）和序列本身。
+    它还定义了一个__lt__方法，用于比较两个节点的优先级（在这种情况下，我们只是比较它们的值）。
+    例：class Problem:
+    def __init__(self, target):
+        self.target = target
+    def initial_node(self):
+        return Node(0, [])
+    def is_solution(self, node):
+        return sum(node.sequence) == self.target
+    def successors(self, node):
+        successors = []
+        for i in range(1, self.target + 1):
+            new_sequence = node.sequence + [i]
+            if sum(new_sequence) <= self.target:
+                successors.append(Node(sum(new_sequence), new_sequence))
+        return successors
+    class Node:
+    def __init__(self, value, sequence):
+        self.value = value
+        self.sequence = sequence
+    def __lt__(self, other):
+        return self.value < other.value
+    """
+    pq=PriorityQueue()
+    pq.put(problem.initial_node)
+    while not pq.empty():
+        node=pq.get()
+        if problem.is_solution(node):
+            return node
+        successors=probelm.succerssors(node)
+        for successor in successors:
+            pq.put(successor)
+    return None

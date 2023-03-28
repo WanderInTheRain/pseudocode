@@ -1,0 +1,31 @@
+def best_fisrt_search(evaluation_fuction,is_goal,get_children):
+    """
+    例：
+    # 定义评估函数
+    def evaluation_function(node):
+    # 假设评估值为节点的编号
+    return node
+
+    # 定义目标检测函数
+    def is_goal(node):
+    # 假设目标节点是节点3
+    return node == 3
+
+    # 定义获取子节点的函数
+    def get_children(node):
+    # 获取与当前节点相邻的所有节点
+    children = []
+    for i in range(len(graph)):
+        if graph[node][i] != 0:
+            children.append(i)
+    return children
+    """
+    heap=[root]
+    while heap:
+        current_node=heapq.heappop(heap)
+        if is_goal(current_node):
+            return current_node
+        children=get_children(current_node)
+        for child in children:
+            heapq.heappush(heap,(evaluation_function(child),child))
+    return None

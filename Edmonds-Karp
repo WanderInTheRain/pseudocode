@@ -1,0 +1,85 @@
+from collections import queue
+
+def bfs(graph,s,t,parent):
+    visited=[False]*len(graph)
+    queue=deque()
+    queue.append(s)
+    visited[s]=True
+    
+    while queue:
+        u=queue.popleft()
+        for ind,val in enumerate(graph[u]):
+            if visited[ind]=False and val>0:
+                queue.append(ind)
+                visited[ind]=True
+                parent[ind]=u
+    return visited[t]
+def edmonds_karp(graph,s,t):
+    parent=[-1]*len(graph)
+    max_flow=0
+    
+    while bfs(graph,s,t,parent):
+        path_flow=float('inf')
+        p=t
+        while p!=s:
+            path_flow=min(path_flow,graph[parent[p]][p])
+            p=parent[p]
+        max_flow += path_flow
+        p=t
+        while p!=s:
+            graph[parent[p]][p]-=path_flow
+            graph[p][parent[p]]+=path_flow
+            p=parent[p]
+    return max_flow
+    
+    """
+    注释版：
+    from collections import deque
+
+def bfs(graph, s, t, parent):
+    # 创建一个布尔数组，用于记录节点是否被访问过
+    visited = [False] * len(graph)
+    # 创建一个队列，用于存储已访问的节点
+    queue = deque()
+    # 将源点加入队列，并标记为已访问
+    queue.append(s)
+    visited[s] = True
+    # 遍历队列中的节点
+    while queue:
+        u = queue.popleft()
+        # 遍历与当前节点相邻的节点
+        for ind, val in enumerate(graph[u]):
+            # 如果相邻节点未被访问且容量大于 0，则将其加入队列并标记为已访问
+            if not visited[ind] and val > 0:
+                queue.append(ind)
+                visited[ind] = True
+                parent[ind] = u
+    # 返回汇点是否被访问过
+    return visited[t]
+
+def edmonds_karp(graph, source, sink):
+    # 创建一个数组，用于存储增广路径上的父节点
+    parent = [-1] * len(graph)
+    # 初始化最大流量为 0
+    max_flow = 0
+    # 当存在增广路径时，继续循环
+    while bfs(graph, source, sink, parent):
+        # 初始化增广路径上的最小容量为无穷大
+        path_flow = float("Inf")
+        s = sink
+        # 遍历增广路径上的所有边，找到最小容量
+        while s != source:
+            path_flow = min(path_flow, graph[parent[s]][s])
+            s = parent[s]
+        # 更新最大流量
+        max_flow += path_flow
+        v = sink
+        # 更新残余网络中增广路径上的所有边的容量
+        while v != source:
+            u = parent[v]
+            graph[u][v] -= path_flow
+            graph[v][u] += path_flow
+            v = parent[v]
+    # 返回最大流量
+    return max_flow
+    """

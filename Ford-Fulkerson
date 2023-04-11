@@ -1,0 +1,11 @@
+Ford_Fulkerson(G,s,t)
+    for each edge(u,v) in E(G)
+        f(u,v)=0
+        f(v,u)=c(u,v)
+    while there exists a path p from s to t in the residual network Gf'
+        cp=min{cf(u,v)|(u,v) is in p}
+        For p上的每条边(u,v) do
+             If (u,v)是流网络中的边 Then
+                    f(u,v) = f(u,v)+cp
+              Else
+                    f(v,u) = f(v,u)-cp
